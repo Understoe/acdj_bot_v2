@@ -64,7 +64,7 @@ client.once("ready", async () => {
 
     for (const event of events.reverse()) {
         const content = {title: event.title, url: event.link, description: `${event.role}\n📅 ${event.day} ${event.month}`, color: 0x5865F2, image: event.imageUrl ? { url: event.imageUrl } : undefined};
-        await channel.send({ content, files: event.imageUrl ? [event.imageUrl] : [] });
+        await channel.send({ embeds: [embed] });
     }
 
     console.log("Messages envoyés.");
