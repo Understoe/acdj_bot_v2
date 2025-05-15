@@ -5,13 +5,13 @@ const { JSDOM } = require("jsdom");
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
 const TAGS = {
-    "MTG : Commander Multi": "@1067857193673699429",
-    "MTG : Modern": "@1067857029470896178",
-    "MTG : Standard": "@1067857092561608764",
-    "MTG : Pioneer": "@1067857419369205951",
-    "MTG : Duel Commander": "@1067857231288217681",
-    "MTG : Pauper": "1372549642667167804",
-    "MTG : Limité": "@1067857130176118855"
+    "MTG : Commander Multi": "<@&1067857193673699429>",
+    "MTG : Modern": "<@&1067857029470896178>",
+    "MTG : Standard": "<@&1067857092561608764>",
+    "MTG : Pioneer": "<@&1067857419369205951>",
+    "MTG : Duel Commander": "<@&@1067857231288217681>",
+    "MTG : Pauper": "<@&1372549642667167804>",
+    "MTG : Limité": "<@&1067857130176118855>"
 };
 
 const TARGET_TAG = "Magic The Gathering";
@@ -63,7 +63,7 @@ client.once("ready", async () => {
     const events = await scrapeEvents();
 
     for (const event of events.reverse()) {
-        const content = `@${event.role}\n **${event.title}**\n📅 ${event.day} ${event.month}\n🔗 ${event.link}`;
+        const content = `${event.role} [**${event.title}**](${event.link})\n📅 ${event.day} ${event.month}`;
         await channel.send({ content, files: event.imageUrl ? [event.imageUrl] : [] });
     }
 
