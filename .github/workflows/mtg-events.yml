@@ -2,7 +2,7 @@ name: MTG Event Scraper
 
 on:
   schedule:
-    - cron: '0 7 * * 1'  # Tous les lundis à 9h (UTC+2)
+    - cron: '5 12 * * 4'  # Jeudi à 12h05 UTC (soit 14h05 heure de Paris)
   workflow_dispatch:
 
 jobs:
