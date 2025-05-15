@@ -9,7 +9,7 @@ const TAGS = {
     "MTG : Modern": "<@&1067857029470896178>",
     "MTG : Standard": "<@&1067857092561608764>",
     "MTG : Pioneer": "<@&1067857419369205951>",
-    "MTG : Duel Commander": "<@&@1067857231288217681>",
+    "MTG : Duel Commander": "<@&1067857231288217681>",
     "MTG : Pauper": "<@&1067857461417099314>",
     "MTG : Limité": "<@&1067857130176118855>"
 };
@@ -63,7 +63,7 @@ client.once("ready", async () => {
     const events = await scrapeEvents();
 
     for (const event of events.reverse()) {
-        const content = [**${event.title}**](${event.link})\n${event.role}\n📅 ${event.day} ${event.month};
+        const content = `${event.role} **${event.title}**\n📅 ${event.day} ${event.month}\n🔗 ${event.link}`;
         await channel.send({ content, files: event.imageUrl ? [event.imageUrl] : [] });
     }
 
