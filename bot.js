@@ -62,9 +62,24 @@ client.once("ready", async () => {
 
     const events = await scrapeEvents();
 
+    //for (const event of events.reverse()) {
+        //const content = `${event.role} **${event.title}**\n📅 ${event.day} ${event.month}\n🔗 ${event.link}`;
+        //await channel.send({ content, files: event.imageUrl ? [event.imageUrl] : [] });
+    //}
     for (const event of events.reverse()) {
-        const content = `${event.role} **${event.title}**\n📅 ${event.day} ${event.month}\n🔗 ${event.link}`;
-        await channel.send({ content, files: event.imageUrl ? [event.imageUrl] : [] });
+    const embed = {
+        title: event.title,
+        description: `📅 ${event.day} ${event.month}`,
+        color: 0x5865F2,
+        image: event.imageUrl ? { url: event.imageUrl } : undefined
+    };
+
+    const invisibleLink = `[​](${event.link})`; // caractère invisible pour lien masqué
+
+    await channel.send({
+        content: `${invisibleLink}\n${event.role}`,
+        embeds: [embed]
+    });
     }
 
     console.log("Messages envoyés.");
