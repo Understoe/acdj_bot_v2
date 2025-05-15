@@ -63,18 +63,20 @@ client.once("ready", async () => {
     const events = await scrapeEvents();
 
     for (const event of events.reverse()) {
-    const embed = {
-        title: event.title,
-        url: event.link,
-        description: `📅 ${event.day} ${event.month}`,
-        color: 0x5865F2,
-        image: event.imageUrl ? { url: event.imageUrl } : undefined
-    };
+        const randomColor = Math.floor(Math.random() * 0xFFFFFF);
 
-    await channel.send({
-        content: event.role, // Ceci permet de ping le rôle
-        embeds: [embed]
-    });
+        const embed = {
+            title: event.title,
+            url: event.link,
+            description: `📅 ${event.day} ${event.month}`,
+            color: randomColor,
+            image: event.imageUrl ? { url: event.imageUrl } : undefined
+        };
+
+        await channel.send({
+            content: event.role,
+            embeds: [embed]
+        });
     }
 
     console.log("Messages envoyés.");
