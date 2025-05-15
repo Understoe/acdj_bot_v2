@@ -10,7 +10,7 @@ const TAGS = {
     "MTG : Standard": "@1067857092561608764",
     "MTG : Pioneer": "@1067857419369205951",
     "MTG : Duel Commander": "@1067857231288217681",
-    "MTG : Pauper": "@1372549642667167804",
+    "MTG : Pauper": "1372549642667167804",
     "MTG : Limité": "@1067857130176118855"
 };
 
@@ -63,7 +63,7 @@ client.once("ready", async () => {
     const events = await scrapeEvents();
 
     for (const event of events.reverse()) {
-        const content = `${event.role}\n **${event.title}**\n📅 ${event.day} ${event.month}\n🔗 ${event.link}`;
+        const content = `@${event.role}\n **${event.title}**\n📅 ${event.day} ${event.month}\n🔗 ${event.link}`;
         await channel.send({ content, files: event.imageUrl ? [event.imageUrl] : [] });
     }
 
