@@ -1,0 +1,11 @@
+{
+  "name": "mtg-discord-bot",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.0.0",
+    "jsdom": "^22.1.0",
+    "node-fetch": "^2.6.7"
+  }
+}
