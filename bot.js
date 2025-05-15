@@ -63,7 +63,7 @@ client.once("ready", async () => {
     const events = await scrapeEvents();
 
     for (const event of events.reverse()) {
-        const content = `[**${event.title}**](${event.link})\n${event.role}\n📅 ${event.day} ${event.month}`;
+        const content = {title: event.title, url: event.link, description: `${event.role}\n📅 ${event.day} ${event.month}`, color: 0x5865F2, image: event.imageUrl ? { url: event.imageUrl } : undefined};
         await channel.send({ content, files: event.imageUrl ? [event.imageUrl] : [] });
     }
 
