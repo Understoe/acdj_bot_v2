@@ -2,14 +2,16 @@ const fetch = require("node-fetch");
 const { Client, GatewayIntentBits } = require("discord.js");
 const { JSDOM } = require("jsdom");
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
+const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]
+});
 
 const TAGS = {
     "MTG : Commander Multi": "<@&1067857193673699429>",
     "MTG : Modern": "<@&1067857029470896178>",
     "MTG : Standard": "<@&1067857092561608764>",
     "MTG : Pioneer": "<@&1067857419369205951>",
-    "MTG : Duel Commander": "<@&@1067857231288217681>",
+    "MTG : Duel Commander": "<@&1067857231288217681>",
     "MTG : Pauper": "<@&1067857461417099314>",
     "MTG : Limité": "<@&1067857130176118855>"
 };
@@ -39,7 +41,7 @@ async function scrapeEvents() {
         const fullLink = "https://au-coin-du-jeu.odoo.com" + link;
         const imgDiv = div.querySelector(".o_record_cover_image");
         const imgStyle = imgDiv?.getAttribute("style") || "";
-        const imageUrlMatch = imgStyle.match(/url\(['"]?(.*?)['"]?\)/);
+        const imageUrlMatch = imgStyle.match(/url\\(['"]?(.*?)['"]?\\)/);
         const imageUrl = imageUrlMatch ? "https://au-coin-du-jeu.odoo.com" + imageUrlMatch[1] : null;
 
         events.push({
@@ -63,7 +65,14 @@ client.once("ready", async () => {
     const events = await scrapeEvents();
 
     for (const event of events.reverse()) {
-        const content = {title: event.title, url: event.link, description: `${event.role}\n📅 ${event.day} ${event.month}`, color: 0x5865F2, image: event.imageUrl ? { url: event.imageUrl } : undefined};
+        const embed = {
+            title: event.title,
+            url: event.link,
+            description: `${event.role}\n📅 ${event.day} ${event.month}`,
+            color: 0x5865F2,
+            image: event.imageUrl ? { url: event.imageUrl } : undefined
+        };
+
         await channel.send({ embeds: [embed] });
     }
 
